@@ -1,9 +1,10 @@
 # rails-docker
 
 ## Setup
-1. docker-compose run --rm web bundle exec rails new . --force --database=mysql --skip-bundle
-2. docker-compose run --rm web bundle --jobs=4 --retry=5
-3. `config/database.yml`を編集する
+1. .env.sampleを.envにリネーム
+2. docker-compose run --rm web bundle exec rails new . --force --database=mysql --skip-bundle
+3. docker-compose run --rm web bundle --jobs=4 --retry=5
+4. `config/database.yml`を編集する
 ```
 ...
 default: &default
@@ -15,6 +16,6 @@ default: &default
     host: db
 ...
 ```
-4. docker-compose run --rm web bundle exec rails db:create
+5. docker-compose run --rm web bundle exec rails db:create
 6. docker-compose up
 
