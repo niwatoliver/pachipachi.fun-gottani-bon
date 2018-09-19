@@ -1,2 +1,30 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<% tweet_text = "#{@user.name} さんにぱちぱちしました！ #{user_url(@user)}" %>
+<div class="l-user">
+  <h1 class="title is-3">
+    <i class="fa fa-fw fa-hand-stop-o"></i>ぱちぱちを送る
+  </h1>
+  <div class="l-user__userInfo">
+    <!-- 6.5で作成した ユーザ情報コンポーネント -->
+    <%= render 'components/user_info', user: @user, show_link_content: true %>
+  </div>
+  <%= form_tag clap_path do %>
+    <!-- ぱちぱちボタン -->
+    <div class="c-clap">
+      <%= button_tag type: 'submit',
+                     data: { confirm: "#{@user.name} さんにぱちぱちしますか？" },
+                     class: 'c-clapButton' do %>
+        <%= image_tag 'clap.svg', class: 'c-clapButton__img' %>
+        <%= image_tag 'clap_hover.svg', class: 'c-clapButton__hoverImg' %>
+      <% end %>
+    </div>
+    <p>「ぱちぱち」したことを同時につぶやく</p>
+    <!-- ツイートするための textarea -->
+    <div class="field c-tweet">
+      <div class="control">
+        <%= text_area_tag :text, tweet_text, class: 'textarea is-info' %>
+      </div>
+    </div>
+    <!-- ぱちぱちをする相手 user id -->
+    <%= hidden_field_tag :user_id, @user.id %>
+  <% end %>
+</div>

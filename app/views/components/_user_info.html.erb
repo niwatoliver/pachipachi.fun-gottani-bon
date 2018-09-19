@@ -1,0 +1,41 @@
+<% twitter_base_url = 'https://twitter.com/' %>
+<div class="card c-user">
+  <div class="card-content">
+    <div class="media">
+      <div class="media-left">
+        <figure class="image is-48x48">
+          <%= link_to user_path(user) do %>
+            <img class="c-clapButton__img is-rounded"
+                 src="<%=user.image_url.sub(/http/, 'https') %>"/>
+          <% end %>
+        </figure>
+      </div>
+      <div class="media-content">
+        <%= link_to user_path(user), class: 'title is-5 c-user__name' do %>
+          <% if show_link_content %>
+            <%=user.name %>
+          <% else %>
+            <%= truncate(user.name, length: 10, ommission: '...') %>
+          <% end %>
+        <% end %>
+        <a href="<%= twitter_base_url << user.nickname %>"
+           target="_blank "
+           class="subtitle is-6 c-user__name">
+          <% if show_link_content %>
+            @<%=user.nickname %>
+          <% else %>
+            @<%= truncate(user.nickname, length: 22, ommission: '...')%>
+          <% end %>
+        </a>
+      </div>
+    </div>
+    <% if show_link_content %>
+      <div class="content">
+        <i class="fa fa-fw fa-hand-stop-o"></i>
+        <%= user.name %> さんの ぱちぱちリンク
+        <i class="fa fa-fw fa-hand-stop-o"></i><br>
+        <%= user_url(user) %>
+      </div>
+    <% end %>
+  </div>
+</div>

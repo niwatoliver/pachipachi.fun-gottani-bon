@@ -1,15 +1,35 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>App</title>
+    <title>ぱちぱち</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <!-- スマートフォン用のメタタグ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
-
   <body>
-    <%= yield %>
+  <!-- ヘッダーここから -->
+  <div class="l-header">
+    <% if @current_user %>
+      <figure class="image is-32x32">
+        <%= link_to root_path do %>
+          <img class="l-header__userImage is-rounded"
+               src="<%= @current_user.image_url.sub(/http/, 'https') %>"/>
+        <% end %>
+      </figure>
+      <%= link_to 'ログアウト', logout_path, class: 'button is-link' %>
+    <% end %>
+  </div>
+  <!-- ヘッダーここまで -->
+  <!-- アラートここから -->
+  <% if flash[:notice] %>
+    <div class="navbar is-success c-alert">
+      <p class="c-alert__text"><%= flash[:notice] %></p>
+    </div>
+  <% end %>
+  <!-- アラートここまで -->
+  <%= yield %>
   </body>
 </html>

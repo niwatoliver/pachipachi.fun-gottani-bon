@@ -1,0 +1,28 @@
+.c-twitterLogin {
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 4px;
+
+  &__button {
+    display: block;
+    background-color: #55acee;
+    color: #FFF;
+    width: 100%;
+    max-width: 640px;
+    margin: 0 auto;
+    border-color: transparent !important;
+
+    &:hover {
+      background-color: #49a6ed;
+      color: #FFF;
+    }
+
+    &[disabled] {
+      background-color: #55acee;
+    }
+  }
+
+  &__icon {
+    margin: 0 4px;
+  }
+}

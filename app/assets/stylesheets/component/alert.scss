@@ -1,0 +1,17 @@
+.c-alert {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-start;
+  align-items: center;
+
+  &__text {
+    margin-left: 16px;
+  }
+
+  @media screen and (min-width: 480px) {
+    justify-content: center;
+  }
+}

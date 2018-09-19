@@ -1,2 +1,26 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="l-home">
+  <h1 class="title is-3">
+    <i class="fa fa-fw fa-home"></i>マイページ
+  </h1>
+  <div class="l-home__userInfo">
+    <!-- 6.5で作成した ユーザ情報コンポーネント -->
+    <%= render 'components/user_info', user: @current_user, show_link_content: true %>
+  </div>
+  <div class="l-home__history">
+    <div class="l-home__historyTop">
+      <div class="l-home__historyButton">
+        <p class=" c-clapButton">
+          <%= image_tag 'clap.svg', class: 'c-clapButton__img' %>
+          <%= image_tag 'clap_hover.svg', class: 'c-clapButton__hoverImg' %>
+        </p>
+      </div>
+      <h1 class="title is-4 l-home__historyTitle">ぱちぱち受信履歴</h1>
+    </div>
+    <div class="c-userList">
+      <% @users_of_received.each do |user| %>
+        <!-- 6.5で作成した ユーザ情報コンポーネント -->
+        <%= render 'components/user_info', user: user, show_link_content: false %>
+      <% end %>
+    </div>
+  </div>
+</div>

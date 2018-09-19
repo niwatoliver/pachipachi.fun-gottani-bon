@@ -1,2 +1,20 @@
-<h1>Sessions#new</h1>
-<p>Find me in app/views/sessions/new.html.erb</p>
+<div class="l-login">
+  <div class="l-login__top c-title">
+    <h1 class="c-title__header title is-1">ぱちぱち</h1>
+    <p class="c-title__description">
+      相手に気軽におめでとうやありがとうの意味を込めて「ぱちぱち」を送れるサービスです。
+    </p>
+  </div>
+  <div class="c-clap">
+    <%= image_tag 'clap.svg' %>
+  </div>
+  <div class="l-login__login">
+    <div class="c-twitterLogin">
+      <%= button_to '/auth/twitter',
+                    class: 'c-twitterLogin__button button',
+                    data: { disable_with: "Please wait..." } do %>
+        <span class="fa fa-twitter c-twitterLogin__icon"></span>Twitterでログイン
+      <% end %>
+    </div>
+  </div>
+</div>

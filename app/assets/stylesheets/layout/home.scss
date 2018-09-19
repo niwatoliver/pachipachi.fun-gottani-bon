@@ -1,0 +1,40 @@
+.l-home {
+  padding: 80px 0 0;
+  max-width: 1080px;
+  text-align: center;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: column;
+  justify-content: flex-start;
+  min-height: 100vh;
+  background-color: #FFFFCC;
+
+  &__history {
+    margin: 32px auto;
+
+    &Top {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    &Button {
+      width: 60px;
+      height: 60px;
+      border: 2px solid #4a4a4a;
+      padding: 8px;
+      border-radius: 50%;
+    }
+
+    &Title {
+      margin-left: 8px;
+    }
+  }
+
+  &__userInfo {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
