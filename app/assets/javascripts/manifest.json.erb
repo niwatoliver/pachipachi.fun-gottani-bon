@@ -1,0 +1,19 @@
+<% icon_sizes = Rails.configuration.serviceworker.icon_sizes %>
+{
+  "name": "Pachipachi App",
+  "short_name": "Pachipachi",
+  "start_url": "/",
+  "icons": [
+    <% icon_sizes.map { |s| "#{s}x#{s}" }.each.with_index do |dim, i| %>
+    {
+      "src": "<%=image_path "icons/icon-#{dim}.png" %>",
+      "sizes": "<%= dim %>",
+      "type": "image/png"
+    }<%= i == (icon_sizes.length - 1) ? '' : ',' %>
+    <% end %>
+  ],
+  "theme_color": "#fcd550",
+  "background_color": "#00c8e6",
+  "display": "standalone",
+  "orientation": "portrait"
+}
