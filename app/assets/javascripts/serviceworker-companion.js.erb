@@ -1,0 +1,57 @@
+var PUSH_CHECK_PATHS = ['/'];
+var swRegistration = null;
+
+if (navigator.serviceWorker) {
+  navigator.serviceWorker.register('/serviceworker.js', { scope: './' })
+      .then(function(reg) {
+        swRegistration = reg;
+        console.log('[Companion]', 'Service worker registered!');
+        if(PUSH_CHECK_PATHS.includes(location.pathname)) {
+          subscribe();
+        }
+      });
+}
+
+var convertedVapidKey = new Uint8Array(
+    <%= Base64.urlsafe_decode64(ENV['WEB_PUSH_VAPID_PUBLIC_KEY']).bytes %>
+);
+
+function subscribe() {
+  if (!canNotification()) { return; }
+  var newSubscription = null;
+  return swRegistration.pushManager.subscribe({
+    userVisibleOnly: true,
+    applicationServerKey: convertedVapidKey
+  }).then(function (subscription) {
+    newSubscription = subscription;
+    console.log('User is subscribed.');
+  }).catch(function(e) {
+    console.error('Unable to subscribe to push.', e);
+  }).then(function () {
+    if (newSubscription !== null) {
+      createSubscriptionOnServer(newSubscription);
+    }
+  });
+}
+
+function canNotification() {
+  // When not supported push notification
+  if (!('showNotification' in ServiceWorkerRegistration.prototype)) { return false; }
+  // When deny push notification
+  if (Notification.permission === 'denied') { return false; }
+  // When not exist PushManager
+  if (!('PushManager' in window)) { return false; }
+  return true;
+}
+
+function createSubscriptionOnServer(subscription) {
+  return fetch('/subscription', {
+    body: JSON.stringify({
+      subscription: subscription
+    }),
+    headers: {
+      'content-type': 'application/json'
+    },
+    method: 'POST'
+  })
+}

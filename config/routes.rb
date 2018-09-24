@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   post   '/claps'                   => 'claps#create'         , as: :clap
   get    '/logout'                  => 'sessions#destroy'     , as: :logout
   get    '/login'                   => 'sessions#new'         , as: :login
+  post   '/subscription'            => 'subscriptions#create'
   get    '/users/:id'               => 'users#show'           , as: :user
 end

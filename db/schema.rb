@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_18_120526) do
+ActiveRecord::Schema.define(version: 2018_09_19_081806) do
 
   create_table "claps", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "from_user_id"
@@ -19,6 +19,16 @@ ActiveRecord::Schema.define(version: 2018_09_18_120526) do
     t.datetime "updated_at", null: false
     t.index ["from_user_id"], name: "index_claps_on_from_user_id"
     t.index ["to_user_id"], name: "index_claps_on_to_user_id"
+  end
+
+  create_table "subscriptions", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "user_id"
+    t.string "endpoint"
+    t.string "p256dh"
+    t.string "auth"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
